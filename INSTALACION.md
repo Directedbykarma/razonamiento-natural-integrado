@@ -21,13 +21,13 @@
 ### Opción 1: Un solo comando
 ```bash
 # Instala y configura todo automáticamente
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tu-usuario/razonamiento-natural-integrado/main/scripts/setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Directedbykarma/razonamiento-natural-integrado/main/scripts/setup.sh)"
 ```
 
 ### Opción 2: Descargar y ejecutar
 ```bash
 # 1. Descargar script
-curl -O https://raw.githubusercontent.com/tu-usuario/razonamiento-natural-integrado/main/scripts/setup.sh
+curl -O https://raw.githubusercontent.com/Directedbykarma/razonamiento-natural-integrado/main/scripts/setup.sh
 
 # 2. Dar permisos de ejecución
 chmod +x setup.sh
@@ -40,7 +40,7 @@ chmod +x setup.sh
 
 ### Paso 1: Clonar repositorio
 ```bash
-git clone https://github.com/tu-usuario/razonamiento-natural-integrado.git
+git clone https://github.com/Directedbykarma/razonamiento-natural-integrado.git
 cd razonamiento-natural-integrado
 ```
 
