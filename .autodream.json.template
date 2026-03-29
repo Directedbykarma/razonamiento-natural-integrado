@@ -1,0 +1,27 @@
+{
+  "maxLines": 400,
+  "lookbackDays": 60,
+  "memoryDir": "memory",
+  "memoryIndex": "MEMORY.md",
+  "categories": [
+    "People & Relationships",
+    "Projects & Work",
+    "Preferences & Style",
+    "Technical Decisions",
+    "Important Events",
+    "Lessons Learned",
+    "Custom Project"
+  ],
+  "preservePatterns": [
+    "⚠️",
+    "IMPORTANTE",
+    "NUNCA",
+    "SIEMPRE",
+    "CRÍTICO",
+    "URGENTE"
+  ],
+  "triggerThreshold": {
+    "minHoursSinceLastRun": 24,
+    "minNewFiles": 3
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "razonamiento-natural-integrado",
+  "version": "1.0.0",
+  "description": "Sistema de memoria avanzada para OpenClaw - Razonamiento semántico + Consolidación natural + Organización integrada",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "setup": "bash scripts/setup.sh",
+    "verify": "bash scripts/verify.sh",
+    "docs": "npx markdown-toc README.md -i"
+  },
+  "keywords": [
+    "openclaw",
+    "memory",
+    "ai",
+    "semantic",
+    "consolidation",
+    "autodream",
+    "engram",
+    "reasoning",
+    "natural"
+  ],
+  "author": "Kk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tu-usuario/razonamiento-natural-integrado.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/razonamiento-natural-integrado/issues"
+  },
+  "homepage": "https://github.com/tu-usuario/razonamiento-natural-integrado#readme",
+  "peerDependencies": {
+    "openclaw": ">=1.0.0",
+    "openclaw-autodream": ">=1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "files": [
+    "scripts/",
+    ".autodream.json.template",
+    ".autodream-state.json.example",
+    "README.md",
+    "LICENSE"
+  ]
+}
