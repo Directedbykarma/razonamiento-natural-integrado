@@ -8,7 +8,7 @@
 
 **Instalación en un comando:**
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Directedbykarma/razonamiento-natural-integrado/main/scripts/setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Directedbykarma/razonamiento-natural-integrado/master/scripts/setup.sh)"
 ```
 
 **Sistema de memoria avanzada para OpenClaw** que combina razonamiento semántico con consolidación natural y organización integrada.
@@ -58,7 +58,7 @@ RNI es un sistema de memoria que reemplaza el sistema básico de OpenClaw con:
 ### Opción 1: Instalación automática (recomendada)
 ```bash
 # Un solo comando instala y configura todo
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Directedbykarma/razonamiento-natural-integrado/main/scripts/setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Directedbykarma/razonamiento-natural-integrado/master/scripts/setup.sh)"
 ```
 
 ### Opción 2: Instalación manual
