@@ -61,6 +61,11 @@ echo -e "\n🔧 Verificando funcionalidad..."
 verify "AutoDream puede leer configuración" "cd \"$WORKSPACE_DIR\" && autodream stats --config .autodream.json --dry-run" "Revisa permisos y configuración"
 verify "OpenClaw gateway accesible" "openclaw gateway status 2>&1 | grep -q \"Runtime:\"" "Inicia OpenClaw: openclaw gateway start"
 
+echo -e "\n🧠 Verificando Engram/QMD..."
+verify "Engram está habilitado" "openclaw config get engram.enabled 2>/dev/null | grep -q true" "Ejecuta: openclaw config set engram.enabled true"
+verify "Directorio Engram existe" "[ -d \"$WORKSPACE_DIR/memory/local\" ]" "Crea: mkdir -p $WORKSPACE_DIR/memory/local"
+verify "Engram puede extraer" "openclaw config get engram.autoExtract 2>/dev/null | grep -q true" "Ejecuta: openclaw config set engram.autoExtract true"
+
 echo -e "\n📊 Verificando límites..."
 if [ -f "$WORKSPACE_DIR/MEMORY.md" ]; then
     LINE_COUNT=$(wc -l < "$WORKSPACE_DIR/MEMORY.md")

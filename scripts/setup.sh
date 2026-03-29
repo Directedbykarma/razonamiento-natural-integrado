@@ -91,6 +91,22 @@ fi
 # Crear directorio memory si no existe
 mkdir -p "$WORKSPACE_DIR/memory"
 
+# Configurar Engram/QMD (búsqueda semántica)
+echo -e "\n🧠 Configurando Engram/QMD..."
+if ! openclaw config get engram.enabled > /dev/null 2>&1; then
+    echo -e "${YELLOW}⚠️  Engram no configurado, activando...${NC}"
+    run_check "openclaw config set engram.enabled true"
+    run_check "openclaw config set engram.memoryDir \"memory/local\""
+    run_check "openclaw config set engram.autoExtract true"
+    run_check "openclaw config set engram.extractOnSave true"
+    echo -e "${GREEN}✅ Engram/QMD configurado${NC}"
+else
+    echo -e "${GREEN}✅ Engram/QMD ya está configurado${NC}"
+fi
+
+# Crear estructura de directorios para Engram
+mkdir -p "$WORKSPACE_DIR/memory/local"
+
 # Verificar instalación completa
 echo -e "\n🔧 Verificación final..."
 run_check "cd $WORKSPACE_DIR && autodream stats --config .autodream.json"

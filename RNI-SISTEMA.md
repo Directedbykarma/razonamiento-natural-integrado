@@ -299,9 +299,14 @@ git pull origin main
 
 ### Engram (Razonamiento Semántico)
 - **Base vectorial**: QMD (Query Matching Database)
-- **Extracción**: Entidades, relaciones, conceptos
-- **Indexado**: Automático de conversaciones
-- **Búsqueda**: Semántica, no keyword-based
+- **Extracción automática**: `engram.autoExtract: true`
+- **Extracción on-save**: `engram.extractOnSave: true`
+- **Directorio índice**: `memory/local/`
+- **Entidades**: Personas, proyectos, conceptos técnicos
+- **Relaciones**: Conexiones entre entidades extraídas
+- **Indexado**: Automático de conversaciones en tiempo real
+- **Búsqueda**: Semántica por significado, no keyword-based
+- **Configuración automática**: Script setup.sh activa y configura
 
 ### AutoDream (Consolidación Natural)
 - **Deduplicación**: Exacta (100%) + Fuzzy (90%+ similitud)

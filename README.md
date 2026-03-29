@@ -32,22 +32,26 @@ RNI es un sistema de memoria que reemplaza el sistema básico de OpenClaw con:
 
 ## ✨ Características
 
-### 🧠 Razonamiento (Engram)
+### 🧠 Razonamiento (Engram/QMD)
 - **Búsqueda semántica** por significado (no keywords)
-- **Base vectorial** con QMD
-- **Extracción automática** de conversaciones
-- **Native knowledge** integrado
+- **Base vectorial** con QMD (Query Matching Database)
+- **Extracción automática** de entidades y conceptos
+- **Indexado en tiempo real** de conversaciones
+- **Native knowledge** integrado en OpenClaw
 
 ### 🌙 Natural (AutoDream)
-- **Consolidación automática** cada 24h
-- **Eliminación de duplicados** (exactos + fuzzy)
+- **Consolidación automática** cada 24h (2 AM)
+- **Eliminación de duplicados** (exactos + fuzzy matching)
 - **Organización por categorías** (7 personalizables)
 - **Límites inteligentes** (400 líneas máximo)
+- **Backups automáticos** de cada consolidación
 
-### 🔗 Integrado (Sistema)
-- **Cron programado** (2 AM diario)
-- **Backups automáticos**
-- **Configuración personalizada**
+### 🔗 Integrado (Sistema RNI)
+- **Instalación automática** en un comando
+- **Cron programado** para consolidación diaria
+- **Configuración Engram+AutoDream** optimizada
+- **Verificación completa** del sistema
+- **Workspace estructurado** listo para producción
 
 ## 🚀 Instalación Rápida
 

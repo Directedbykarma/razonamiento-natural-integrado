@@ -109,6 +109,18 @@ nano ~/.openclaw/workspace/.autodream.json
 }
 ```
 
+### Configurar Engram/QMD (búsqueda semántica)
+```bash
+# Engram se configura automáticamente en setup.sh
+# Verificar configuración:
+openclaw config get engram.enabled      # Debe ser "true"
+openclaw config get engram.autoExtract  # Debe ser "true"
+openclaw config get engram.memoryDir    # Debe ser "memory/local"
+
+# Probar búsqueda semántica (después de usar OpenClaw)
+openclaw memory search "término de búsqueda"
+```
+
 ### Configurar OpenClaw (opcional)
 ```bash
 # Verificar que OpenClaw está configurado
