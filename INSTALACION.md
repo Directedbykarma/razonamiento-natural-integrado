@@ -44,12 +44,12 @@ git clone https://github.com/Directedbykarma/razonamiento-natural-integrado.git
 cd razonamiento-natural-integrado
 ```
 
-### Paso 2: Instalar dependencias globales
+### Paso 2: Verificar dependencias (OpenClaw ya debe estar instalado)
 ```bash
-# Instalar OpenClaw
-npm install -g openclaw@latest
+# Verificar que OpenClaw está instalado
+openclaw --version
 
-# Instalar AutoDream
+# Instalar AutoDream (requerido para RNI)
 npm install -g openclaw-autodream
 ```
 
@@ -338,7 +338,7 @@ tail -100 ~/.openclaw/workspace/memory/autodream-cron.log
 
 - [ ] Node.js 18+ instalado
 - [ ] npm 8+ instalado
-- [ ] OpenClaw instalado globalmente
+- [ ] OpenClaw verificado (ya instalado)
 - [ ] AutoDream instalado globalmente
 - [ ] Workspace creado en `~/.openclaw/workspace/`
 - [ ] Configuración RNI copiada

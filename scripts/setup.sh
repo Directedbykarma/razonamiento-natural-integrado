@@ -19,7 +19,12 @@ NC='\033[0m' # No Color
 check_command() {
     if ! command -v "$1" &> /dev/null; then
         echo -e "${RED}❌ Error: $1 no está instalado${NC}"
-        echo "Instala con: $2"
+        echo "   $2"
+        if [ "$1" = "openclaw" ]; then
+            echo -e "${YELLOW}💡 Si OpenClaw está instalado pero no se encuentra:${NC}"
+            echo "   export PATH=\"\$HOME/.npm-global/bin:\$PATH\""
+            echo "   (o reinicia tu terminal después de instalar)"
+        fi
         exit 1
     fi
     echo -e "${GREEN}✅ $1 instalado${NC}"
