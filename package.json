@@ -20,16 +20,16 @@
     "reasoning",
     "natural"
   ],
-  "author": "DirectedbyKarma",
+  "author": "Directedbykarma",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DirectedbyKarma/razonamiento-natural-integrado.git"
+    "url": "git+https://github.com/Directedbykarma/razonamiento-natural-integrado.git"
   },
   "bugs": {
-    "url": "https://github.com/DirectedbyKarma/razonamiento-natural-integrado/issues"
+    "url": "https://github.com/Directedbykarma/razonamiento-natural-integrado/issues"
   },
-  "homepage": "https://github.com/DirectedbyKarma/razonamiento-natural-integrado#readme",
+  "homepage": "https://github.com/Directedbykarma/razonamiento-natural-integrado#readme",
   "peerDependencies": {
     "openclaw": ">=1.0.0",
     "openclaw-autodream": ">=1.0.0"

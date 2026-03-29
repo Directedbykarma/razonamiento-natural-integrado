@@ -237,4 +237,4 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 
 **RNI** - Porque la memoria debería ser inteligente, no manual. 🧠🌙🔗
 
-*Autor: [DirectedbyKarma](https://github.com/DirectedbyKarma)*
+*Autor: [Directedbykarma](https://github.com/Directedbykarma)*
