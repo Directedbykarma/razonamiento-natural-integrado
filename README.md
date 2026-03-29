@@ -91,11 +91,8 @@ Edita `~/.openclaw/workspace/.autodream.json` para:
 ## 📊 Estadísticas del Sistema
 
 ```bash
-# Ver estadísticas actuales
-autodream stats --config ~/.openclaw/workspace/.autodream.json
-
-# Ejecutar consolidación manual
-autodream run --config ~/.openclaw/workspace/.autodream.json
+# Ejecutar consolidación / ver estadísticas
+autodream ~/.openclaw/workspace
 
 # Ver logs de cron
 tail -f ~/.openclaw/workspace/memory/autodream-cron.log
@@ -107,8 +104,8 @@ tail -f ~/.openclaw/workspace/memory/autodream-cron.log
 |---------|-------------|
 | `npm run setup` | Instala y configura RNI |
 | `npm run verify` | Verifica instalación correcta |
-| `autodream stats` | Muestra estadísticas del sistema |
-| `autodream run` | Ejecuta consolidación manual |
+| `autodream ~/.openclaw/workspace` | Ejecuta consolidación manual |
+| `openclaw plugins list` | Ver plugins instalados |
 | `openclaw gateway status` | Verifica estado de OpenClaw |
 
 ## 📁 Estructura del Proyecto
@@ -172,16 +169,15 @@ razonamiento-natural-integrado/
 crontab -l | grep autodream
 
 # Ejecutar manualmente
-cd ~/.openclaw/workspace && autodream run --config .autodream.json
+autodream ~/.openclaw/workspace
 ```
 
 ### Problema: "Configuración inválida"
 ```bash
 # Validar JSON
-python3 -m json.tool ~/.openclaw/workspace/.autodream.json
+node -e "JSON.parse(require('fs').readFileSync('$HOME/.openclaw/workspace/.autodream.json','utf8')); console.log('JSON válido')"
 
-# Restaurar desde template
-cp .autodream.json.template ~/.openclaw/workspace/.autodream.json
+# Restaurar desde template: ejecuta setup.sh de nuevo
 ```
 
 ### Problema: "Memoria no se consolida"
@@ -190,7 +186,17 @@ cp .autodream.json.template ~/.openclaw/workspace/.autodream.json
 wc -l ~/.openclaw/workspace/MEMORY.md
 
 # Forzar consolidación
-autodream run --config ~/.openclaw/workspace/.autodream.json --force
+autodream ~/.openclaw/workspace
+```
+
+### Problema: "Engram no está disponible"
+```bash
+# Instalar y habilitar plugin
+openclaw plugins install @joshuaswarren/openclaw-engram
+openclaw plugins enable openclaw-engram
+
+# Verificar
+openclaw plugins list
 ```
 
 ## 📈 Roadmap
@@ -230,3 +236,5 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 ---
 
 **RNI** - Porque la memoria debería ser inteligente, no manual. 🧠🌙🔗
+
+*Autor: [DirectedbyKarma](https://github.com/DirectedbyKarma)*

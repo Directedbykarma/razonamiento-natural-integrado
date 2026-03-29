@@ -2,6 +2,7 @@
 
 # RNI - Script de verificación del sistema
 # Verifica que RNI esté instalado y funcionando correctamente
+# Autor: DirectedbyKarma
 
 set -euo pipefail
 
@@ -22,9 +23,9 @@ verify() {
     local description="$1"
     local command="$2"
     local fix_hint="$3"
-    
+
     echo -n "• $description: "
-    
+
     if eval "$command" > /dev/null 2>&1; then
         echo -e "${GREEN}✅ OK${NC}"
         return 0
@@ -46,25 +47,25 @@ verify "AutoDream instalado" "autodream --version" "Ejecuta: npm install -g open
 
 echo -e "\n📁 Verificando estructura..."
 verify "Workspace existe" "[ -d \"$WORKSPACE_DIR\" ]" "Ejecuta el script setup.sh primero"
-verify "Configuración RNI existe" "[ -f \"$WORKSPACE_DIR/.autodream.json\" ]" "Copia .autodream.json.template a $WORKSPACE_DIR/.autodream.json"
-verify "Archivo de estado existe" "[ -f \"$WORKSPACE_DIR/.autodream-state.json\" ]" "Copia .autodream-state.json.example a $WORKSPACE_DIR/.autodream-state.json"
+verify "Configuración RNI existe" "[ -f \"$WORKSPACE_DIR/.autodream.json\" ]" "Ejecuta setup.sh para crear la configuración"
+verify "Archivo de estado existe" "[ -f \"$WORKSPACE_DIR/.autodream-state.json\" ]" "Ejecuta setup.sh para crear el archivo de estado"
 verify "Directorio memory existe" "[ -d \"$WORKSPACE_DIR/memory\" ]" "Crea: mkdir -p $WORKSPACE_DIR/memory"
 
 echo -e "\n⚙️  Verificando configuración..."
-verify "Configuración JSON válida" "cd \"$WORKSPACE_DIR\" && python3 -m json.tool .autodream.json > /dev/null" "Revisa la sintaxis de .autodream.json"
-verify "Estado JSON válido" "cd \"$WORKSPACE_DIR\" && python3 -m json.tool .autodream-state.json > /dev/null" "Revisa la sintaxis de .autodream-state.json"
+verify "Configuración JSON válida" "cd \"$WORKSPACE_DIR\" && node -e \"JSON.parse(require('fs').readFileSync('.autodream.json','utf8'))\"" "Revisa la sintaxis de .autodream.json"
+verify "Estado JSON válido" "cd \"$WORKSPACE_DIR\" && node -e \"JSON.parse(require('fs').readFileSync('.autodream-state.json','utf8'))\"" "Revisa la sintaxis de .autodream-state.json"
 
 echo -e "\n⏰ Verificando cron job..."
-verify "Cron job configurado" "crontab -l 2>/dev/null | grep -q \"autodream run\"" "Ejecuta setup.sh para configurar el cron job automático"
+verify "Cron job configurado" "crontab -l 2>/dev/null | grep -q \"autodream\"" "Ejecuta setup.sh para configurar el cron job automático"
 
 echo -e "\n🔧 Verificando funcionalidad..."
-verify "AutoDream puede leer configuración" "cd \"$WORKSPACE_DIR\" && autodream stats --config .autodream.json --dry-run" "Revisa permisos y configuración"
+verify "AutoDream puede leer workspace" "autodream \"$WORKSPACE_DIR\"" "Revisa permisos y configuración"
 verify "OpenClaw gateway accesible" "openclaw gateway status 2>&1 | grep -q \"Runtime:\"" "Inicia OpenClaw: openclaw gateway start"
 
 echo -e "\n🧠 Verificando Engram/QMD..."
-verify "Engram está habilitado" "openclaw config get engram.enabled 2>/dev/null | grep -q true" "Ejecuta: openclaw config set engram.enabled true"
+verify "Plugin Engram instalado" "openclaw plugins list 2>/dev/null | grep -q \"openclaw-engram\"" "Ejecuta: openclaw plugins install @joshuaswarren/openclaw-engram"
+verify "Plugin Engram habilitado" "openclaw plugins list 2>/dev/null | grep -q \"openclaw-engram.*enabled\"" "Ejecuta: openclaw plugins enable openclaw-engram"
 verify "Directorio Engram existe" "[ -d \"$WORKSPACE_DIR/memory/local\" ]" "Crea: mkdir -p $WORKSPACE_DIR/memory/local"
-verify "Engram puede extraer" "openclaw config get engram.autoExtract 2>/dev/null | grep -q true" "Ejecuta: openclaw config set engram.autoExtract true"
 
 echo -e "\n📊 Verificando límites..."
 if [ -f "$WORKSPACE_DIR/MEMORY.md" ]; then
@@ -87,7 +88,7 @@ MEMORY_FILES=$(find "$WORKSPACE_DIR/memory" -name "*.md" -type f 2>/dev/null | w
 echo -n "• Archivos en memory/: "
 if [ "$MEMORY_FILES" -gt 0 ]; then
     echo -e "${GREEN}✅ $MEMORY_FILES archivos${NC}"
-    
+
     # Mostrar los 3 más recientes
     echo -e "  ${YELLOW}📁 Archivos más recientes:${NC}"
     find "$WORKSPACE_DIR/memory" -name "*.md" -type f -exec ls -lt {} + 2>/dev/null | head -3 | awk '{print "    • " $6 " " $7 " " $8 " - " $9}'
@@ -101,7 +102,7 @@ if [ "$ERRORS" -eq 0 ]; then
     echo -e "${GREEN}🎉 RNI está instalado y funcionando correctamente!${NC}"
     echo ""
     echo "📊 Estadísticas del sistema:"
-    cd "$WORKSPACE_DIR" && autodream stats --config .autodream.json 2>/dev/null || echo "  (ejecuta 'autodream stats' para ver detalles)"
+    autodream "$WORKSPACE_DIR" 2>/dev/null || echo "  (ejecuta 'autodream $WORKSPACE_DIR' para ver detalles)"
 else
     echo -e "${YELLOW}⚠️  Se encontraron $ERRORS problema(s)${NC}"
     echo ""
@@ -113,7 +114,7 @@ else
 fi
 
 echo -e "\n🚀 Comandos útiles:"
-echo "  • Ver estadísticas: autodream stats --config .autodream.json"
-echo "  • Ejecutar consolidación manual: autodream run --config .autodream.json"
+echo "  • Ejecutar consolidación manual: autodream $WORKSPACE_DIR"
 echo "  • Ver logs de cron: tail -f $WORKSPACE_DIR/memory/autodream-cron.log"
 echo "  • Verificar OpenClaw: openclaw gateway status"
+echo "  • Ver plugins: openclaw plugins list"

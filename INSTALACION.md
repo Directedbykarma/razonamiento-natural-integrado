@@ -70,8 +70,10 @@ mkdir -p ~/.openclaw/workspace/memory
 
 ### Paso 4: Configurar cron job
 ```bash
-# Agregar a crontab
-(crontab -l 2>/dev/null; echo "0 2 * * * cd ~/.openclaw/workspace && autodream run --config .autodream.json --state .autodream-state.json >> memory/autodream-cron.log 2>&1") | crontab -
+# Agregar a crontab (con ruta absoluta y PATH correcto)
+AUTODREAM_BIN="$(which autodream)"
+WORKSPACE="$HOME/.openclaw/workspace"
+(crontab -l 2>/dev/null; echo "0 2 * * * PATH=\"/usr/local/bin:/usr/bin:/bin:$HOME/.npm-global/bin\" $AUTODREAM_BIN $WORKSPACE >> $WORKSPACE/memory/autodream-cron.log 2>&1") | crontab -
 ```
 
 ### Paso 5: Verificar instalación
@@ -111,11 +113,13 @@ nano ~/.openclaw/workspace/.autodream.json
 
 ### Configurar Engram/QMD (búsqueda semántica)
 ```bash
-# Engram se configura automáticamente en setup.sh
-# Verificar configuración:
-openclaw config get engram.enabled      # Debe ser "true"
-openclaw config get engram.autoExtract  # Debe ser "true"
-openclaw config get engram.memoryDir    # Debe ser "memory/local"
+# Engram se configura automáticamente en setup.sh como plugin
+# Verificar instalación:
+openclaw plugins list | grep engram
+
+# Instalar manualmente si hace falta:
+openclaw plugins install @joshuaswarren/openclaw-engram
+openclaw plugins enable openclaw-engram
 
 # Probar búsqueda semántica (después de usar OpenClaw)
 openclaw memory search "término de búsqueda"
@@ -149,14 +153,17 @@ autodream --version
 # 2. Verificar estructura
 ls -la ~/.openclaw/workspace/
 
-# 3. Verificar configuración
-python3 -m json.tool ~/.openclaw/workspace/.autodream.json
+# 3. Verificar configuración JSON
+node -e "JSON.parse(require('fs').readFileSync('$HOME/.openclaw/workspace/.autodream.json','utf8')); console.log('JSON válido')"
 
 # 4. Verificar cron job
 crontab -l | grep autodream
 
 # 5. Probar AutoDream
-cd ~/.openclaw/workspace && autodream stats --config .autodream.json
+autodream ~/.openclaw/workspace
+
+# 6. Verificar plugin Engram
+openclaw plugins list | grep engram
 ```
 
 ### Resultados esperados
@@ -204,8 +211,10 @@ source ~/.bashrc
 
 ### Problema: "Cron job no se configura"
 ```bash
-# Configurar manualmente
-echo "0 2 * * * cd ~/.openclaw/workspace && autodream run --config .autodream.json --state .autodream-state.json >> memory/autodream-cron.log 2>&1" >> ~/mycron
+# Configurar manualmente (con ruta absoluta)
+AUTODREAM_BIN="$(which autodream)"
+WORKSPACE="$HOME/.openclaw/workspace"
+echo "0 2 * * * PATH=\"/usr/local/bin:/usr/bin:/bin:$HOME/.npm-global/bin\" $AUTODREAM_BIN $WORKSPACE >> $WORKSPACE/memory/autodream-cron.log 2>&1" >> ~/mycron
 crontab ~/mycron
 rm ~/mycron
 ```
@@ -345,7 +354,7 @@ tail -100 ~/.openclaw/workspace/memory/autodream-cron.log
 RNI ahora trabajará automáticamente en segundo plano. La primera consolidación ocurrirá a las 2 AM de la próxima madrugada, o puedes ejecutarla manualmente con:
 
 ```bash
-cd ~/.openclaw/workspace && autodream run --config .autodream.json
+autodream ~/.openclaw/workspace
 ```
 
 Para más información, consulta:

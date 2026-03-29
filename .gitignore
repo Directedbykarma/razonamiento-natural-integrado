@@ -75,6 +75,9 @@ docs/_build/
 # Archivos de prueba
 test-results/
 
+# Configuración npm local (puede contener tokens)
+.npmrc
+
 # Credenciales y tokens
 credentials.json
 service-account-key.json
