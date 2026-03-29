@@ -42,7 +42,7 @@ verify() {
 echo -e "\n📦 Verificando dependencias..."
 verify "Node.js instalado" "node --version" "Instala Node.js desde https://nodejs.org/"
 verify "npm instalado" "npm --version" "Instala npm con Node.js"
-verify "OpenClaw instalado" "openclaw --version" "Ejecuta: npm install -g openclaw@latest"
+verify "OpenClaw instalado" "openclaw --version" "npm install -g openclaw@latest (si no lo tienes)"
 verify "AutoDream instalado" "autodream --version" "Ejecuta: npm install -g openclaw-autodream"
 
 echo -e "\n📁 Verificando estructura..."

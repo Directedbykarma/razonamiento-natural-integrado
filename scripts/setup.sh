@@ -36,17 +36,13 @@ run_check() {
     fi
 }
 
-# Verificar requisitos
-echo -e "\n📋 Verificando requisitos..."
+# Verificar requisitos (para usuarios con OpenClaw ya instalado)
+echo -e "\n📋 Verificando requisitos para RNI..."
+check_command "openclaw" "npm install -g openclaw@latest (si no lo tienes)"
 check_command "node" "https://nodejs.org/"
 check_command "npm" "https://npmjs.com/"
-check_command "git" "https://git-scm.com/"
 
-# Instalar OpenClaw
-echo -e "\n📦 Instalando OpenClaw..."
-run_check "npm install -g openclaw@latest"
-
-# Instalar AutoDream
+# Instalar AutoDream (requerido para RNI)
 echo -e "\n🌙 Instalando AutoDream..."
 run_check "npm install -g openclaw-autodream"
 
@@ -148,7 +144,7 @@ run_check "autodream $WORKSPACE_DIR"
 echo -e "\n${GREEN}🎉 RNI instalado exitosamente!${NC}"
 echo ""
 echo "📋 Resumen de instalación:"
-echo "  • OpenClaw: ✅ Instalado"
+echo "  • OpenClaw: ✅ Verificado (ya instalado)"
 echo "  • AutoDream: ✅ Instalado"
 echo "  • Plugin Engram: ✅ Instalado y habilitado"
 echo "  • Configuración RNI: ✅ Creada"
@@ -156,9 +152,10 @@ echo "  • Cron job: ✅ Configurado (2 AM diario)"
 echo "  • Workspace: $WORKSPACE_DIR"
 echo ""
 echo "🚀 Para comenzar:"
-echo "  1. Ejecuta: cd $WORKSPACE_DIR"
-echo "  2. Edita .autodream.json para personalizar categorías"
-echo "  3. Usa OpenClaw normalmente - RNI trabajará en segundo plano"
+echo "  1. Usa OpenClaw normalmente - RNI trabajará en segundo plano"
+echo "  2. Las conversaciones se guardarán en memory/YYYY-MM-DD.md"
+echo "  3. AutoDream consolidará automáticamente a las 2 AM"
+echo "  4. Engram indexará semánticamente para búsquedas"
 echo ""
 echo "📊 Para ver estadísticas:"
 echo "  autodream $WORKSPACE_DIR"
